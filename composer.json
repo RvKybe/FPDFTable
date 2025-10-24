@@ -1,0 +1,13 @@
+{
+  "name": "fpdftable/fpdftable",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "require": {
+    "php": "5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "./"
+    }
+  }
+}
