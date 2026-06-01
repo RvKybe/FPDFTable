@@ -4,6 +4,7 @@ namespace FPDF;
 
 use FPDF\lib\Color;
 use FPDF\lib\HTMLParser;
+use FPDF\lib\TreeHTML;
 
 /**
  * Класс FPDFTable предназначен для создания PDF-документа из html-подобной разметки с использованием FPDF.
@@ -554,8 +555,8 @@ class FPDFTable extends FPDF
         fseek($f, 13, SEEK_SET);
         $info = fread($f, 3);
         fclose($f);
-        $iUnit = ord($info{0});
-        $iX = ord($info{1}) * 256 + ord($info{2});
+        $iUnit = ord($info[0]);
+        $iX = ord($info[1]) * 256 + ord($info[2]);
         return array($iUnit, $iX);
     }
 
@@ -1264,16 +1265,16 @@ class FPDFTable extends FPDF
         if (strlen($type) == 4) {
             $x2 = $x + $w;
             $y2 = $y + $h;
-            if (intval($type{0})) {
+            if (intval($type[0])) {
                 $this->Line($x, $y, $x2, $y);
             }
-            if (intval($type{1})) {
+            if (intval($type[1])) {
                 $this->Line($x2, $y, $x2, $y2);
             }
-            if (intval($type{2})) {
+            if (intval($type[2])) {
                 $this->Line($x, $y2, $x2, $y2);
             }
-            if (intval($type{3})) {
+            if (intval($type[3])) {
                 $this->Line($x, $y, $x, $y2);
             }
         } elseif (intval($type) === 1) {

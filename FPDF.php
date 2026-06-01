@@ -1051,9 +1051,6 @@ function _dochecks()
 	// Check mbstring overloading
 	if(ini_get('mbstring.func_overload') & 2)
 		$this->Error('mbstring overloading must be disabled');
-	// Ensure runtime magic quotes are disabled
-	if(get_magic_quotes_runtime())
-		@set_magic_quotes_runtime(0);
 }
 
 function _checkoutput()
@@ -1143,7 +1140,8 @@ function _endpage()
 function _loadfont($font)
 {
 	// Load a font definition file from the font directory
-	include($this->fontpath.$font);
+    $path = isset($this->fontpath) ? $this->fontpath : __DIR__ . '/font/';
+	include($path.$font);
 	$a = get_defined_vars();
 	if(!isset($a['name']))
 		$this->Error('Could not include font definition file');
@@ -1349,8 +1347,8 @@ function _parsepngstream($f, $file)
 				$color .= $data[$pos];
 				$alpha .= $data[$pos];
 				$line = substr($data,$pos+1,$len);
-				$color .= preg_replace('/(.{3})./s','$1',$line);
-				$alpha .= preg_replace('/.{3}(.)/s','$1',$line);
+				$color .= preg_replace('/(.[3])./s','$1',$line);
+				$alpha .= preg_replace('/.[3](.)/s','$1',$line);
 			}
 		}
 		unset($data);

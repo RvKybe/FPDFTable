@@ -52,11 +52,11 @@ class Color{
 	/**
 	 * @desc Convert color #ffffff to RGB
 	 */
-	function HEX2RGB($c){
+	static function HEX2RGB($c){
 		if (strlen($c)!=7) return 0;
-		$r[] = hexdec($c{1}.$c{2});
-		$r[] = hexdec($c{3}.$c{4});
-		$r[] = hexdec($c{5}.$c{6});
+		$r[] = hexdec($c[1].$c[2]);
+		$r[] = hexdec($c[3].$c[4]);
+		$r[] = hexdec($c[5].$c[6]);
 		return $r;
 	}
 
