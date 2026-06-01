@@ -5,7 +5,9 @@
   "require": {
     "php": "^7.4",
       "ext-mbstring": "*",
-      "ext-iconv": "*"
+      "ext-iconv": "*",
+      "ext-zlib": "*",
+      "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {

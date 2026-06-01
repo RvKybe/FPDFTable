@@ -3,7 +3,7 @@
 namespace FPDF;
 
 use FPDF\lib\Color;
-use FPDF\lib\HTMLParser;
+use FPDF\lib\parser\HTMLParser;
 use FPDF\lib\TreeHTML;
 
 /**
