@@ -1,4 +1,6 @@
 <?php
+
+namespace FPDF\lib;
 /**
  * Title: Library color function
  * Class: Color
@@ -83,4 +85,3 @@ class Color{
 		return $color;
 	}
 }
-?>

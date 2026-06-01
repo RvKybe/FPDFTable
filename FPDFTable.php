@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__.'/fpdf.php';
-require_once __DIR__.'/lib/color.php';
-require_once __DIR__.'/lib/htmlparser.php';
+namespace FPDF;
+
+use FPDF\lib\Color;
+use FPDF\lib\HTMLParser;
 
 /**
  * Класс FPDFTable предназначен для создания PDF-документа из html-подобной разметки с использованием FPDF.
@@ -1468,4 +1469,3 @@ class FPDFTable extends FPDF
         $this->y = $table['lasty'];
     }
 }
-?>

@@ -1,5 +1,6 @@
 <?php
-require_once './../fpdftable.php';
+
+use FPDF\FPDFTable;
 
 $pdf = new FPDFTable();
 $pdf->SetTitle('Example 2', true);
@@ -73,4 +74,3 @@ TABLE;
 $html .= '</table>';
 $pdf->htmltable($html);
 $pdf->Output('example_2.pdf', 'I');
-?>

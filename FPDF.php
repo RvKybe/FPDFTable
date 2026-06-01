@@ -7,7 +7,8 @@
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
 
-define('FPDF_VERSION','1.7');
+namespace FPDF;
+define('FPDF_VERSION', '1.7');
 
 class FPDF
 {
@@ -1801,4 +1802,4 @@ if(isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT']=='contype')
 	exit;
 }
 
-?>
+
