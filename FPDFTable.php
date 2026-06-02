@@ -938,12 +938,12 @@ class FPDFTable extends FPDF
         $fontopen = false;
         $tdopen = false;
         foreach ($t->name as $i=>$element) {
-            if ($fontopen && $t->type[$i] == NODE_TYPE_ENDELEMENT
+            if ($fontopen && $t->type[$i] == HTMLParser::NODE_TYPE_ENDELEMENT
                 && (in_array($element, array('table', 'tr', 'td', 'font')))
                 ) {
                 $fontopen = false;
             }
-            if ($tdopen && $t->type[$i] == NODE_TYPE_ENDELEMENT
+            if ($tdopen && $t->type[$i] == HTMLParser::NODE_TYPE_ENDELEMENT
                 && (in_array($element, array('table', 'tr', 'td')))
                 && !isset($cell[$row][$col]['miw'])
                 ) {
@@ -951,8 +951,8 @@ class FPDFTable extends FPDF
                 $c['miw'] = $c['maw'] = 0;
                 $tdopen = false;
             }
-            if ($t->type[$i] != NODE_TYPE_ELEMENT 
-                && $t->type[$i] != NODE_TYPE_TEXT
+            if ($t->type[$i] != HTMLParser::NODE_TYPE_ELEMENT
+                && $t->type[$i] != HTMLParser::NODE_TYPE_TEXT
                 ) {
                 continue;
             }

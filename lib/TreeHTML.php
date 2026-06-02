@@ -2,9 +2,7 @@
 
 namespace FPDF\lib;
 
-use const NODE_TYPE_ELEMENT;
-use const NODE_TYPE_ENDELEMENT;
-use const NODE_TYPE_TEXT;
+use FPDF\lib\parser\HTMLParser;
 
 class TreeHTML{
     var $type = array();
@@ -25,13 +23,13 @@ class TreeHTML{
                 if (strtolower($parser->iNodeName)=='body') break;
         }
         while ($parser->parse()){
-            if ($parser->iNodeType == NODE_TYPE_ENDELEMENT && strtolower($parser->iNodeName)=='body' && $file) break;
+            if ($parser->iNodeType == HTMLParser::NODE_TYPE_ENDELEMENT && strtolower($parser->iNodeName)=='body' && $file) break;
 
             $this->type[$i] = $parser->iNodeType;
             $this->name[$i] = $parser->iNodeName;
-            if ($parser->iNodeType == NODE_TYPE_TEXT)
+            if ($parser->iNodeType == HTMLParser::NODE_TYPE_TEXT)
                 $this->value[$i] = $parser->iNodeValue;
-            if ($parser->iNodeType == NODE_TYPE_ELEMENT){
+            if ($parser->iNodeType == HTMLParser::NODE_TYPE_ELEMENT){
                 $this->attribute[$i] = $parser->iNodeAttributes;
                 if (isset($parser->iNodeAttributes['name'])){
                     $this->field[$i] = trim($parser->iNodeAttributes['name'],"\"' ");
@@ -97,7 +95,7 @@ class TreeHTML{
         $index = array_search($name, $this->field);
         if (!$index) return;
         $this->removeIndex($index);
-        $this->type[$index] = NODE_TYPE_TEXT;
+        $this->type[$index] = HTMLParser::NODE_TYPE_TEXT;
         $this->value[$index] = $text;
     }
 
@@ -113,7 +111,7 @@ class TreeHTML{
         for ($end=$index+1;$end<$len;$end++){
             if (isset($this->name[$end]) && $this->name[$end] == $rname) break;
         }
-        if (isset($this->type[$end]) && $this->type[$end]==NODE_TYPE_ENDELEMENT){
+        if (isset($this->type[$end]) && $this->type[$end]==HTMLParser::NODE_TYPE_ENDELEMENT){
             for ($i=$index;$i<=$end;$i++) $this->removeIndex($i);
         }else
             $this->removeIndex($index);
@@ -147,7 +145,7 @@ class TreeHTML{
         for ($i=0; $i<$len;$i++){
             $str = '';
             switch($type[$i]){
-                case NODE_TYPE_ELEMENT:
+                case HTMLParser::NODE_TYPE_ELEMENT:
                     if ($name[$i] != 'textarea'){
                         $str .= '<'.$name[$i];
                         if (isset($attr[$i])) foreach($attr[$i] as $key => $value){
@@ -171,10 +169,10 @@ class TreeHTML{
                         $str .= '>'.$content;
                     }
                     break;
-                case NODE_TYPE_ENDELEMENT:
+                case HTMLParser::NODE_TYPE_ENDELEMENT:
                     $str .= '</'.$name[$i].'>';
                     break;
-                case NODE_TYPE_TEXT:
+                case HTMLParser::NODE_TYPE_TEXT:
                     $str = $valu[$i];
                     break;
             }
