@@ -1011,7 +1011,8 @@ class FPDF {
 
     function _loadfont($font) {
         // Load a font definition file from the font directory
-        include($this->fontpath . $font);
+        $path = $this->fontpath ?? __DIR__ . '/font/';
+        include($path.$font);
         $a = get_defined_vars();
         if (!isset($a['name']))
             $this->Error('Could not include font definition file');
@@ -1356,7 +1357,8 @@ class FPDF {
             // Font file embedding
             $this->_newobj();
             $this->FontFiles[$file]['n'] = $this->n;
-            $font                        = file_get_contents($this->fontpath . $file, true);
+            $path = $this->fontpath ?? __DIR__ . '/font/';
+            $font = file_get_contents($path . $file, true);
             if (!$font)
                 $this->Error('Font file not found: ' . $file);
             $compressed = (substr($file, -2) == '.z');
