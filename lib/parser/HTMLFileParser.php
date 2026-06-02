@@ -3,7 +3,7 @@
 namespace FPDF\lib\parser;
 
 class HTMLFileParser extends HTMLParser {
-    function HTMLFileParser($fileName){
+    function __construct($fileName){
         $fp = fopen ($fileName, "r");
         $content = "";
         while (true) {
@@ -14,6 +14,6 @@ class HTMLFileParser extends HTMLParser {
             $content .= $data;
         }
         fclose ($fp);
-        $this->HTMLParser($content);
+        parent::__construct($content);
     }
 }

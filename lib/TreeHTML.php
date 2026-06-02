@@ -16,7 +16,7 @@ class TreeHTML{
      * @return array
      * @desc Tao mot tree node cac phan tu cua HTML
      */
-    function TreeHTML($parser, $file=true){
+    function __construct($parser, $file=true){
         $i = 0;
         if ($file){
             while ($parser->parse())

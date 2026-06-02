@@ -62,7 +62,7 @@ class HTMLParser {
      * Constructs an HTMLParser instance with
      * the HTML text given.
      */
-    function HTMLParser($aHtmlText) {
+    function __construct($aHtmlText) {
         $this->iHtmlText       = $aHtmlText;
         $this->iHtmlTextLength = strlen($aHtmlText);
         $this->setTextIndex(0);

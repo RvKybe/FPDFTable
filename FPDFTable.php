@@ -103,13 +103,13 @@ class FPDFTable extends FPDF
      * @param string $encoding    Кодировка документа. По умолчанию - Cyrillic 1251.
      *                            (default = 'windows-1251')
      */
-    public function FPDFTable(
+    public function __construct(
         $orientation = 'P',
         $unit = 'mm',
         $size = 'A4',
         $encoding = 'windows-1251'
         ) {
-        parent::FPDF($orientation, $unit, $size);
+        parent::__construct($orientation, $unit, $size);
         if ($orientation === 'P') {
             $this->SetMargins(20, 10, 10);
         } else {
